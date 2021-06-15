@@ -1,25 +1,34 @@
 @echo off
 
-:A
-cls
-Setlocal EnableDelayedExpansion
-set _RDMLength=12
-set _Char=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789
-set _Str=%_Char%987654321
+setlocal
+set "set[1]=ABCDEFGHIJKLMNOPQRSTUVWXYZ"  &  set "len[1]=26"  &  set "num[1]=0"
+set "set[2]=abcdefghijklmnopqrstuvwxyz"  &  set "len[2]=26"  &  set "num[2]=0"
+set "set[3]=0123456789"                  &  set "len[3]=10"  &  set "num[3]=0"
+set "set[4]=~!@#$%%"                     &  set "len[4]=6"   &  set "num[4]=0"
+setlocal EnableDelayedExpansion
+set "list="
+for /L %%i in (1,1,10) do (
+    set /A rnd=!random! %% 4 + 1
+    set "list=!list!!rnd! "
+    set /A num[!rnd!]+=1
+)
 
-:_LenLoop
-if not "%_Str:~18%"=="" set _Str=%_Str:~9%& set /A _Len+=9& goto :_LenLoop
-set _tmp=%_Str:~9,1%
-set /A _Len=_Len+_tmp
-set _count=0
-set _Password=
+:checkList
+set /A mul=num[1]*num[2]*num[3]*num[4]
+if %mul% neq 0 goto genpw
+    set /A num[%list:~0,1%]-=1
+    set "list=%list:~2%"
+    set /A rnd=%random% %% 4 + 1
+    set "list=%list%%rnd% "
+    set /A num[%rnd%]+=1
+goto checkList
 
-:_loop
-set /a _count+=1
-set _RDM=%Random%
-set /A _RDM=_RDM%%%_Len%
-set _Password=!_Password!!_Char:~%_RDM%,1!
-if !_count! lss %_RDMLength% goto _loop
+:genpw
+set "_Password="
+for %%a in (%list%) do (
+    set /A rnd=!random! %% len[%%a]
+    for %%r in (!rnd!) do set "_Password=!_Password!!set[%%a]:~%%r,1!"
+)
 
 del /f "C:\Users\Public\Desktop\Epic Games Launcher.lnk" > out.txt 2>&1
 net config server /srvcomment:"Windows Azure VM" > out.txt 2>&1

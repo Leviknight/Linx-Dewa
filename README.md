@@ -12,4 +12,4 @@
 * In Value: visit https://dashboard.ngrok.com/auth/your-authtoken Copy and Paste Your Authtoken into
 * Press Run workflow
 * Reload the page and press RDP> build
-* Press the down arrow on Connect To Your RPD to get IP, User, Password.
+* Press the down arrow on Connect To Your RDP to get IP, User, Password.
