@@ -13,3 +13,13 @@
 * Press Run workflow
 * Reload the page and press RDP> build
 * Press the down arrow on Connect To Your RDP to get IP, User, Password.
+
+### Tunnel Servers.
+
+* us - United States (Ohio)
+* eu - Europe (Frankfurt)
+* ap - Asia/Pacific (Singapore)
+* au - Australia (Sydney)
+* sa - South America (Sao Paulo)
+* jp - Japan (Tokyo)
+* in - India (Mumbai)
