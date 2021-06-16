@@ -6,10 +6,14 @@ on:
       authtoken:
         description: 'Ngrok Auth Token'
         required: true
+      tunnelservers:
+        description: 'Ngrok Tunnel Servers'
+        default: 'us'
+        required: true
 
 jobs:
   build:
-
+    if: github.event.inputs.cb == 'us' || github.event.inputs.cb == 'eu' || github.event.inputs.cb == 'ap' || github.event.inputs.cb == 'au' || github.event.inputs.cb == 'sa' || github.event.inputs.cb == 'jp' || github.event.inputs.cb == 'in'
     runs-on: windows-latest
     timeout-minutes: 9999
 
@@ -23,16 +27,51 @@ jobs:
         copy nssm.exe C:\Windows\System32
         copy ngrok.exe C:\Windows\System32
     - name: Connect your NGROK account
-      run: .\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
-      env:
-        NGROK_AUTH_TOKEN: ${{ github.event.inputs.authtoken }}
+      run: .\ngrok.exe authtoken ${{ github.event.inputs.authtoken }}
     - name: Download Important Files.
+      if: github.event.inputs.cb == 'us'
       run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-US.bat -OutFile NGROK-US.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-US.bat -OutFile NGROK-RG.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/loop.bat -OutFile loop.bat
+    - name: Download Important Files.
+      if: github.event.inputs.cb == 'eu'
+      run: |
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-EU.bat -OutFile NGROK-RG.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/loop.bat -OutFile loop.bat
+    - name: Download Important Files.
+      if: github.event.inputs.cb == 'ap'
+      run: |
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-AP.bat -OutFile NGROK-RG.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/loop.bat -OutFile loop.bat
+    - name: Download Important Files.
+      if: github.event.inputs.cb == 'au'
+      run: |
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-AU.bat -OutFile NGROK-RG.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/loop.bat -OutFile loop.bat
+    - name: Download Important Files.
+      if: github.event.inputs.cb == 'sa'
+      run: |
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-SA.bat -OutFile NGROK-RG.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/loop.bat -OutFile loop.bat
+    - name: Download Important Files.
+      if: github.event.inputs.cb == 'jp'
+      run: |
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-JP.bat -OutFile NGROK-RG.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/loop.bat -OutFile loop.bat
+    - name: Download Important Files.
+      if: github.event.inputs.cb == 'in'
+      run: |
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-IN.bat -OutFile NGROK-RG.bat
         Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
         Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/loop.bat -OutFile loop.bat
     - name: Make YML file for NGROK.
-      run: start NGROK-US.bat
+      run: start NGROK-RG.bat
     - name: Enable RDP Access.
       run: | 
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
@@ -43,4 +82,6 @@ jobs:
     - name: Connect to your RDP 2core-7GB Ram.
       run: cmd /c NGROK-CHECK.bat
     - name: Keep Alive.
-      run: cmd /c loop.bat 
+      run: |
+          cmd /c loop.bat 
+          ./Files/t.ps1
