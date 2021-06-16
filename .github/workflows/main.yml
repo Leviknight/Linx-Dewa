@@ -13,7 +13,7 @@ on:
 
 jobs:
   build:
-    if: github.event.inputs.cb == 'us' || github.event.inputs.cb == 'eu' || github.event.inputs.cb == 'ap' || github.event.inputs.cb == 'au' || github.event.inputs.cb == 'sa' || github.event.inputs.cb == 'jp' || github.event.inputs.cb == 'in'
+    if: github.event.inputs.tunnelservers == 'us' || github.event.inputs.tunnelservers == 'eu' || github.event.inputs.tunnelservers == 'ap' || github.event.inputs.tunnelservers == 'au' || github.event.inputs.tunnelservers == 'sa' || github.event.inputs.tunnelservers == 'jp' || github.event.inputs.tunnelservers == 'in'
     runs-on: windows-latest
     timeout-minutes: 9999
 
@@ -28,50 +28,69 @@ jobs:
         copy ngrok.exe C:\Windows\System32
     - name: Connect your NGROK account
       run: .\ngrok.exe authtoken ${{ github.event.inputs.authtoken }}
-    - name: Download Important Files.
-      if: github.event.inputs.cb == 'us'
+    - name: Download Important Files. Tunnel United States (Ohio).
+      if: github.event.inputs.tunnelservers == 'us'
       run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-US.bat -OutFile NGROK-RG.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-US.bat -OutFile NGROK-US.bat
         Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
         Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/loop.bat -OutFile loop.bat
-    - name: Download Important Files.
-      if: github.event.inputs.cb == 'eu'
+    - name: Download Important Files. Tunnel Europe (Frankfurt).
+      if: github.event.inputs.tunnelservers == 'eu'
       run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-EU.bat -OutFile NGROK-RG.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-EU.bat -OutFile NGROK-EU.bat
         Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
         Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/loop.bat -OutFile loop.bat
-    - name: Download Important Files.
-      if: github.event.inputs.cb == 'ap'
+    - name: Download Important Files. Tunnel Asia/Pacific (Singapore).
+      if: github.event.inputs.tunnelservers == 'ap'
       run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-AP.bat -OutFile NGROK-RG.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-AP.bat -OutFile NGROK-AP.bat
         Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
         Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/loop.bat -OutFile loop.bat
-    - name: Download Important Files.
-      if: github.event.inputs.cb == 'au'
+    - name: Download Important Files. Tunnel Australia (Sydney).
+      if: github.event.inputs.tunnelservers == 'au'
       run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-AU.bat -OutFile NGROK-RG.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-AU.bat -OutFile NGROK-AU.bat
         Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
         Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/loop.bat -OutFile loop.bat
-    - name: Download Important Files.
-      if: github.event.inputs.cb == 'sa'
+    - name: Download Important Files. Tunnel South America (Sao Paulo).
+      if: github.event.inputs.tunnelservers == 'sa'
       run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-SA.bat -OutFile NGROK-RG.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-SA.bat -OutFile NGROK-SA.bat
         Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
         Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/loop.bat -OutFile loop.bat
-    - name: Download Important Files.
-      if: github.event.inputs.cb == 'jp'
+    - name: Download Important Files. Tunnel Japan (Tokyo).
+      if: github.event.inputs.tunnelservers == 'jp'
       run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-JP.bat -OutFile NGROK-RG.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-JP.bat -OutFile NGROK-JP.bat
         Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
         Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/loop.bat -OutFile loop.bat
-    - name: Download Important Files.
-      if: github.event.inputs.cb == 'in'
+    - name: Download Important Files. Tunnel India (Mumbai).
+      if: github.event.inputs.tunnelservers == 'in'
       run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-IN.bat -OutFile NGROK-RG.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-IN.bat -OutFile NGROK-IN.bat
         Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
         Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/loop.bat -OutFile loop.bat
-    - name: Make YML file for NGROK.
-      run: start NGROK-RG.bat
+    - name: Make YML file for NGROK Tunnel US.
+      if: github.event.inputs.tunnelservers == 'us'
+      run: start NGROK-US.bat
+    - name: Make YML file for NGROK Tunnel EU.
+      if: github.event.inputs.tunnelservers == 'eu'
+      run: start NGROK-EU.bat
+    - name: Make YML file for NGROK Tunnel AP.
+      if: github.event.inputs.tunnelservers == 'ap'
+      run: start NGROK-AP.bat
+    - name: Make YML file for NGROK Tunnel AU.
+      if: github.event.inputs.tunnelservers == 'au'
+      run: start NGROK-AU.bat
+    - name: Make YML file for NGROK Tunnel SA.
+      if: github.event.inputs.tunnelservers == 'sa'
+      run: start NGROK-SA.bat
+    - name: Make YML file for NGROK Tunnel JP.
+      if: github.event.inputs.tunnelservers == 'jp'
+      run: start NGROK-JP.bat
+    - name: Make YML file for NGROK Tunnel IN.
+      if: github.event.inputs.tunnelservers == 'in'
+      run: start NGROK-IN.bat
     - name: Enable RDP Access.
       run: | 
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
@@ -85,3 +104,4 @@ jobs:
       run: |
           cmd /c loop.bat 
           ./Files/t.ps1
+
