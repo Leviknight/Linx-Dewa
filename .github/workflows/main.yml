@@ -18,10 +18,12 @@ jobs:
     timeout-minutes: 9999
 
     steps:
+    - uses: actions/checkout@v2
     - name: Download Ngrok & NSSM
       run: |
         Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/ngrok.exe -OutFile ngrok.exe
         Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/nssm.exe -OutFile nssm.exe
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/t.ps1 -OutFile t.ps1
     - name: Copy NSSM & Ngrok to Windows Directory.
       run: | 
         copy nssm.exe C:\Windows\System32
@@ -101,7 +103,5 @@ jobs:
     - name: Connect to your RDP 2core-7GB Ram.
       run: cmd /c NGROK-CHECK.bat
     - name: Keep Alive.
-      run: |
-          cmd /c loop.bat 
-          ./Files/t.ps1
+      run: ./t.ps1
 
