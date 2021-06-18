@@ -1,6 +1,1 @@
-$i = 1
-do {
-    Write-Host $i
-    Sleep 10
-    $i++
-} while ($i -gt 0)
+ping 127.0.0.1 -t
