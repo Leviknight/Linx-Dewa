@@ -23,3 +23,14 @@
 * sa - South America (Sao Paulo)
 * jp - Japan (Tokyo)
 * in - India (Mumbai)
+
+### Google Remote Desktop. 
+
+* Click Fork in the right corner of the screen to save it to your Github.
+* Visit https://remotedesktop.google.com/headless to get **Google Remote Desktop Code**
+* Click Start> Next> Allow> Copy Windows (PowerShell)
+* In Github go to Action> RDP> Run workflow
+* In Value: Paste Code
+* Press Run workflow
+* Reload the page and press RDP> build
+* Wait and visit https://remotedesktop.google.com/access to connect rdp
