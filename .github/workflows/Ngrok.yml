@@ -7,11 +7,11 @@ on:
         description: 'Ngrok Auth Token'
         required: true
       tunnelservers:
-        description: 'Ngrok Tunnel Servers (us, eu, ap, au, sa, jp or in')
+        description: 'Ngrok Tunnel Servers (us, eu, ap, au, sa, jp or in)'
         default: 'us'
         required: true
       password:
-        description: 'Password (minimum 8-10 with numbers and characters) leave blank if you want to use automatic password'
+        description: 'Password (minimum 8-10 with numbers and characters) leave blank if you want to use automatic password)'
 
 jobs:
   build:
