@@ -7,9 +7,11 @@ on:
         description: 'Ngrok Auth Token'
         required: true
       tunnelservers:
-        description: 'Ngrok Tunnel Servers'
+        description: 'Ngrok Tunnel Servers (us, eu, ap, au, sa, jp or in'
         default: 'us'
         required: true
+      password:
+        description: 'Password (minimum 8-10 with numbers and characters) leave blank if you want to use automatic password'
 
 jobs:
   build:
@@ -69,6 +71,6 @@ jobs:
     - name: Create Tunnel
       run: sc start ngrok
     - name: Connect to your RDP 2core-7GB Ram.
-      run: cmd /c NGROK-Setup.bat
+      run: cmd /c NGROK-Setup.bat "${{ github.event.inputs.password }}"
     - name: Keep Alive.
       run: ./t.bat
