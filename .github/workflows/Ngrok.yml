@@ -1,4 +1,4 @@
-name: RDP
+name: RDP (Ngrok)
 
 on: 
   workflow_dispatch:
@@ -31,8 +31,21 @@ jobs:
       run: | 
         copy nssm.exe C:\Windows\System32
         copy ngrok.exe C:\Windows\System32
+    - name: Mask Token
+      shell: bash
+      run: |
+        _Token=$(jq -r '.inputs.authtoken' $GITHUB_EVENT_PATH)
+        echo ::add-mask::$_Token
+        echo NGROK_TOKEN="$_Token" >> $GITHUB_ENV
+    - name: Mask Custom Password
+      if: "!github.event.inputs.password == ''"
+      shell: bash
+      run: |
+        _Password=$(jq -r '.inputs.authtoken' $GITHUB_EVENT_PATH)
+        echo ::add-mask::$_Password
+        echo Password="$_Password" >> $GITHUB_ENV
     - name: Connect your NGROK account
-      run: .\ngrok.exe authtoken ${{ github.event.inputs.authtoken }}
+      run: .\ngrok.exe authtoken ${{ env.NGROK_TOKEN }}
     - name: Download Important Files. Tunnel United States (Ohio).
       if: github.event.inputs.tunnelservers == 'us'
       run: |
@@ -75,6 +88,6 @@ jobs:
       run: cmd /c NGROK-Setup.bat
     - name: Account for Connect to your RDP (Custom Password).
       if: "!github.event.inputs.password == ''"
-      run: cmd /c NGROK-Setup.bat `${{ github.event.inputs.password }}
+      run: cmd /c NGROK-Setup.bat `${{ env.Password }}
     - name: Keep Alive.
       run: ./t.bat
