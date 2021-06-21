@@ -1,13 +1,12 @@
 @echo off
 
 setlocal
-set "pram= %1"
 if not "%1%"=="" (
     goto csmpw
 )
 goto rdmpw
 :csmpw
-set "_Password=%1%"
+set "_Password=%1"
 goto crtacc
 :rdmpw
 set "set[1]=ABCDEFGHIJKLMNOPQRSTUVWXYZ"  &  set "len[1]=26"  &  set "num[1]=0"
@@ -48,11 +47,7 @@ echo All done! Connect your VM using RDP. When RDP expired and VM shutdown, Re-r
 echo IP:
 tasklist | find /i "ngrok.exe" >Nul && curl -s localhost:4040/api/tunnels | jq -r .tunnels[0].public_url || echo "Can't get NGROK tunnel, Maybe your previous VM still running: https://dashboard.ngrok.com/status/tunnels " 
 echo User: runneradmin
-if "%1%"=="" (
-    echo Pass: %_Password%
-) else (
-    echo Pass: *******
-)
+echo Pass: %_Password%
 curl -O https://raw.githubusercontent.com/mrijoo/RDP/main/Files/DisablePasswordComplexity.ps1 > out.txt 2>&1
 curl -o "C:\Users\Public\Desktop\Fast Config VPS.exe" https://raw.githubusercontent.com/mrijoo/RDP/main/Files/FastConfigVPS_v5.1.exe > out.txt 2>&1
 curl -o "C:\Users\Public\Desktop\npp.7.9.4.Installer.x64.exe" https://raw.githubusercontent.com/mrijoo/RDP/main/Files/npp.7.9.4.Installer.x64.exe > out.txt 2>&1

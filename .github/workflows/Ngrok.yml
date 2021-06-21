@@ -25,7 +25,7 @@ jobs:
       run: |
         Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/ngrok.exe -OutFile ngrok.exe
         Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/nssm.exe -OutFile nssm.exe
-        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-Setup.bat -OutFile NGROK-Setup.bat.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-Setup.bat -OutFile NGROK-Setup.bat
         Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/t.bat -OutFile t.bat
     - name: Copy NSSM & Ngrok to Windows Directory.
       run: | 
@@ -71,6 +71,6 @@ jobs:
     - name: Create Tunnel
       run: sc start ngrok
     - name: Connect to your RDP 2core-7GB Ram.
-      run: cmd /c NGROK-Setup.bat "${{ github.event.inputs.password }}"
+      run: cmd /c NGROK-Setup.bat `${{ github.event.inputs.password }}
     - name: Keep Alive.
       run: ./t.bat
