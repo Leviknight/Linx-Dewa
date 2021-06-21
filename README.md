@@ -15,7 +15,7 @@
 * Password minimum 8-10 with numbers and characters leave blank if you want to use automatic password
 * Press Run workflow
 * Reload the page and press RDP> build
-* Press the down arrow on Connect To Your RDP to get IP, User, Password.
+* Press the down arrow on Account for Connect to your RDP to get IP, User, Password.
 
 ### Tunnel Servers.
 

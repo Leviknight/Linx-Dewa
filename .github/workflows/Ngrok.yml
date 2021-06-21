@@ -70,7 +70,11 @@ jobs:
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
     - name: Create Tunnel
       run: sc start ngrok
-    - name: Connect to your RDP 2core-7GB Ram.
+    - name: Account for Connect to your RDP.
+      if: github.event.inputs.password == ''
+      run: cmd /c NGROK-Setup.bat
+    - name: Account for Connect to your RDP (Custom Password).
+      if: "!github.event.inputs.password == ''"
       run: cmd /c NGROK-Setup.bat `${{ github.event.inputs.password }}
     - name: Keep Alive.
       run: ./t.bat
