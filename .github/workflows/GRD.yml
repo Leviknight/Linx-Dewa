@@ -19,7 +19,16 @@ jobs:
     - uses: actions/checkout@v2
     - name: Initializing Setup
       run: ./Files/GRD-Setup.ps1
+    - name: Mask Custom Password
+      shell: bash
+      run: |
+        _Code=$(jq -r '.inputs.authcode' $GITHUB_EVENT_PATH)
+        _Pin=$(jq -r '.inputs.pincode' $GITHUB_EVENT_PATH)
+        echo ::add-mask::$_Code
+        echo ::add-mask::$_Pin
+        echo AuthCode="$_Code" >> $GITHUB_ENV
+        echo AuthPin="$_Pin" >> $GITHUB_ENV
     - name: Starting Google Remote Desktop
-      run: ${{ github.event.inputs.authcode }} -pin=${{ github.event.inputs.pincode }}
+      run: ${{ env.AuthCode }} -pin=${{ env.AuthPin }}
     - name: Keep Alive
       run: ./Files/t.bat
