@@ -41,7 +41,7 @@ jobs:
       if: "!github.event.inputs.password == ''"
       shell: bash
       run: |
-        _Password=$(jq -r '.inputs.authtoken' $GITHUB_EVENT_PATH)
+        _Password=$(jq -r '.inputs.password' $GITHUB_EVENT_PATH)
         echo ::add-mask::$_Password
         echo Password="$_Password" >> $GITHUB_ENV
     - name: Connect your NGROK account
