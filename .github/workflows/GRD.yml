@@ -18,8 +18,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Initializing Setup
-      run: ./Files/GRD-Setup.ps1
-    - name: Mask Custom Password
+      run: ./GRD-Setup.ps1
+    - name: Mask Code & Pin.
       shell: bash
       run: |
         _Code=$(jq -r '.inputs.authcode' $GITHUB_EVENT_PATH)

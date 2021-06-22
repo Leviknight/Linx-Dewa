@@ -23,14 +23,15 @@ jobs:
     - uses: actions/checkout@v2
     - name: Download Ngrok & NSSM
       run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/ngrok.exe -OutFile ngrok.exe
+        Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
         Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/nssm.exe -OutFile nssm.exe
-        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-Setup.bat -OutFile NGROK-Setup.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/NGROK-Setup.bat -OutFile NGROK-Setup.bat
         Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/t.bat -OutFile t.bat
+        Expand-Archive ngrok.zip
     - name: Copy NSSM & Ngrok to Windows Directory.
       run: | 
         copy nssm.exe C:\Windows\System32
-        copy ngrok.exe C:\Windows\System32
+        copy ngrok\ngrok.exe C:\Windows\System32
     - name: Mask Token
       shell: bash
       run: |
@@ -45,37 +46,11 @@ jobs:
         echo ::add-mask::$_Password
         echo Password="$_Password" >> $GITHUB_ENV
     - name: Connect your NGROK account
-      run: .\ngrok.exe authtoken ${{ env.NGROK_TOKEN }}
-    - name: Download Important Files. Tunnel United States (Ohio).
-      if: github.event.inputs.tunnelservers == 'us'
+      run: .\ngrok\ngrok.exe authtoken ${{ env.NGROK_TOKEN }}
+    - name: Download Important Files & Make YML file for NGROK.
       run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-US.bat -OutFile NGROK-RG.bat
-    - name: Download Important Files. Tunnel Europe (Frankfurt).
-      if: github.event.inputs.tunnelservers == 'eu'
-      run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-EU.bat -OutFile NGROK-RG.bat
-    - name: Download Important Files. Tunnel Asia/Pacific (Singapore).
-      if: github.event.inputs.tunnelservers == 'ap'
-      run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-AP.bat -OutFile NGROK-RG.bat
-    - name: Download Important Files. Tunnel Australia (Sydney).
-      if: github.event.inputs.tunnelservers == 'au'
-      run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-AU.bat -OutFile NGROK-RG.bat
-    - name: Download Important Files. Tunnel South America (Sao Paulo).
-      if: github.event.inputs.tunnelservers == 'sa'
-      run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-SA.bat -OutFile NGROK-RG.bat
-    - name: Download Important Files. Tunnel Japan (Tokyo).
-      if: github.event.inputs.tunnelservers == 'jp'
-      run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-JP.bat -OutFile NGROK-RG.bat
-    - name: Download Important Files. Tunnel India (Mumbai).
-      if: github.event.inputs.tunnelservers == 'in'
-      run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/Files/NGROK-IN.bat -OutFile NGROK-RG.bat
-    - name: Make YML file for NGROK.
-      run: start NGROK-RG.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/mrijoo/RDP/main/NGROK-RG.bat -OutFile NGROK-RG.bat
+        start NGROK-RG.bat "${{ github.event.inputs.tunnelservers }}"
     - name: Enable RDP Access.
       run: | 
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
@@ -84,10 +59,6 @@ jobs:
     - name: Create Tunnel
       run: sc start ngrok
     - name: Account for Connect to your RDP.
-      if: github.event.inputs.password == ''
-      run: cmd /c NGROK-Setup.bat
-    - name: Account for Connect to your RDP (Custom Password).
-      if: "!github.event.inputs.password == ''"
       run: cmd /c NGROK-Setup.bat `${{ env.Password }}
     - name: Keep Alive.
       run: ./t.bat
