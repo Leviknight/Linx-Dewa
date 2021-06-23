@@ -1,0 +1,46 @@
+name: Ubuntu (Google Remote Desktop)
+on: 
+  workflow_dispatch:
+    inputs:
+      authcode:
+        description: 'Enter Google Remote Desktop (Debian Linux) code'
+        required: true
+      pincode:
+        description: 'Six digit Pin'
+        default: '12345678'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Creating User
+      run: sudo useradd -m User0 && sudo adduser User0 sudo && echo 'User0:User0' | sudo chpasswd
+    - name: Setup Desktop Environment
+      run: sudo apt update && sudo apt install ubuntu-desktop
+    - name: Initializing Setup
+      run: |
+        sudo apt install nautilus expect nano -y
+        sudo apt install --assume-yes xscreensaver
+        sudo apt-get update
+        sudo apt-get install xbase-clients python3-psutil xvfb -y
+        wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
+        wget hhttps://raw.githubusercontent.com/mrijoo/RDP/main/Files/t.bat
+        sudo dpkg --install chrome-remote-desktop_current_amd64.deb
+        sudo apt install --assume-yes --fix-broken
+        touch setup.sh
+        echo "${{ github.event.inputs.authcode }}" >> "setup.sh"
+        chmod 777 setup.sh
+    - name: Starting Google Remote Desktop
+      run: |   
+        expect -c '
+        spawn ./setup.sh
+        expect "Enter a PIN of at least six digits: "
+        send "${{ github.event.inputs.pincode }}\r"
+        expect "Enter the same PIN again: "
+        send "${{ github.event.inputs.pincode }}\r"
+        expect eof
+        '
+    - name: Keep Alive.
+      shell: bash
+      run: sh t.bat

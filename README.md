@@ -1,4 +1,4 @@
-# RDP Windows 10
+# RDP Windows & Ubuntu
 
 > **2CPU & 7GB RAM**
 > ## [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://github.com/mrijoo/RDP/blob/main/.github/workflows/main.yml)
@@ -30,7 +30,7 @@
 ### Google Remote Desktop. 
 
 * Visit https://remotedesktop.google.com/headless to get **Google Remote Desktop Code**
-* Click Start> Next> Allow> Copy Windows (PowerShell)
+* Click Start> Next> Allow> Copy Windows (Windows PowerShell) / Ubuntu (Debian Linux)
 * In Github go to Action> Google Remote Desktop> Run workflow
 * In Value: Paste Code
 * Press Run workflow

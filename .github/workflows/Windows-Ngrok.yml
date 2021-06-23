@@ -1,4 +1,4 @@
-name: RDP (Ngrok)
+name: Windows (Ngrok RDP)
 
 on: 
   workflow_dispatch:
@@ -61,4 +61,5 @@ jobs:
     - name: Account for Connect to your RDP.
       run: cmd /c NGROK-Setup.bat `${{ env.Password }}
     - name: Keep Alive.
-      run: ./t.bat
+      shell: bash
+      run: sh t.bat

@@ -1,10 +1,10 @@
-name: Google Remote Desktop
+name: Windows (Google Remote Desktop)
 
 on: 
   workflow_dispatch:
     inputs:
       authcode:
-        description: 'Enter Google Remote Desktop ( Windows (PowerShell) ) code'
+        description: 'Enter Google Remote Desktop (Windows (PowerShell)) code'
         required: true
       pincode:
         description: 'Six digit Pin'
@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Initializing Setup
-      run: ./GRD-Setup.ps1
+      run: ./GRDP-Setup.ps1
     - name: Mask Code & Pin.
       shell: bash
       run: |
@@ -31,4 +31,5 @@ jobs:
     - name: Starting Google Remote Desktop
       run: ${{ env.AuthCode }} -pin=${{ env.AuthPin }}
     - name: Keep Alive
-      run: ./Files/t.bat
+      shell: bash
+      run: sh t.bat
