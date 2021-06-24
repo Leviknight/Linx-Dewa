@@ -21,8 +21,8 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@
-    - name: Mask Code & Pin.
+    - uses: actions/checkout@v2
+    - name: Mask Token, Username & Password.
       shell: bash
       run: |
         _Token=$(jq -r '.inputs.authtoken' $GITHUB_EVENT_PATH)
@@ -35,11 +35,11 @@ jobs:
         echo UserName="$_User" >> $GITHUB_ENV
         echo Password="$_Pass" >> $GITHUB_ENV
     - name: Setup Environment.
-      run: source setup.sh "${{ env.NGROK_TOKEN }}" "${{ github.event.inputs.tunnelservers }}" "${{ env.UserName }}" "${{ env.Password }}"
+      run: |
+        wget https://raw.githubusercontent.com/mrijoo/RDP/main/Files/t.bat
+        source MacOS-Setup.sh "${{ env.NGROK_TOKEN }}" "${{ github.event.inputs.tunnelservers }}" "${{ env.UserName }}" "${{ env.Password }}"
     - name: IP for Connect to your RDP.
       run: curl --silent http://127.0.0.1:4040/api/tunnels | jq '.tunnels[0].public_url'
     - name: Keep Alive.
       shell: bash
-      run: |
-        wget https://raw.githubusercontent.com/mrijoo/RDP/main/Files/t.bat
-        sh t.bat
+      run: sh t.bat

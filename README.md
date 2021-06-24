@@ -46,7 +46,7 @@
 * Visit https://dashboard.ngrok.com to get **Ngrok Auth Token**.
 * In Github go to Action> MacOS (Ngrok VNC Viewer)> Run workflow.
 * In Value: visit https://dashboard.ngrok.com/auth/your-authtoken Copy and Paste Your Authtoken into.
-* Password minimum 8-10 with numbers and characters leave blank if you want to use automatic password.
+* Password minimum 8-10 numbers/characters.
 * Press Run workflow.
 * Reload the page and press MacOS (Ngrok VNC Viewer)> build.
 * Press the down arrow on IP for Connect to your RDP to get IP.
