@@ -32,4 +32,4 @@ jobs:
       run: ${{ env.AuthCode }} -pin=${{ env.AuthPin }}
     - name: Keep Alive
       shell: bash
-      run: sh t.bat
+      run: sh Files/t.bat
