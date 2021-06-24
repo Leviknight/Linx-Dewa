@@ -14,9 +14,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
+    - name: Mask Code & Pin.
+      shell: bash
+      run: |
+        _Code=$(jq -r '.inputs.authcode' $GITHUB_EVENT_PATH)
+        _Pin=$(jq -r '.inputs.pincode' $GITHUB_EVENT_PATH)
+        echo ::add-mask::$_Code
+        echo ::add-mask::$_Pin
+        echo AuthCode="$_Code" >> $GITHUB_ENV
+        echo AuthPin="$_Pin" >> $GITHUB_ENV
     - name: Creating User
       run: sudo useradd -m User0 && sudo adduser User0 sudo && echo 'User0:User0' | sudo chpasswd
-    - name: Setup Desktop Environment
+    - name: Setup Desktop Environment.
       run: sudo apt update && sudo apt install ubuntu-desktop
     - name: Initializing Setup
       run: |
@@ -29,16 +39,16 @@ jobs:
         sudo dpkg --install chrome-remote-desktop_current_amd64.deb
         sudo apt install --assume-yes --fix-broken
         touch setup.sh
-        echo "${{ github.event.inputs.authcode }}" >> "setup.sh"
+        echo "${{ env.AuthCode }}" >> "setup.sh"
         chmod 777 setup.sh
     - name: Starting Google Remote Desktop
       run: |   
         expect -c '
         spawn ./setup.sh
         expect "Enter a PIN of at least six digits: "
-        send "${{ github.event.inputs.pincode }}\r"
+        send "${{ env.AuthPin }}\r"
         expect "Enter the same PIN again: "
-        send "${{ github.event.inputs.pincode }}\r"
+        send "${{ env.AuthPin }}\r"
         expect eof
         '
     - name: Keep Alive.

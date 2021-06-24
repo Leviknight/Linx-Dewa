@@ -17,8 +17,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Initializing Setup
-      run: ./GRDP-Setup.ps1
     - name: Mask Code & Pin.
       shell: bash
       run: |
@@ -28,6 +26,8 @@ jobs:
         echo ::add-mask::$_Pin
         echo AuthCode="$_Code" >> $GITHUB_ENV
         echo AuthPin="$_Pin" >> $GITHUB_ENV
+    - name: Initializing Setup
+      run: ./GRDP-Setup.ps1
     - name: Starting Google Remote Desktop
       run: ${{ env.AuthCode }} -pin=${{ env.AuthPin }}
     - name: Keep Alive
