@@ -17,5 +17,8 @@ sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resourc
 sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -activate
 
 brew install --cask ngrok
+brew install --cask google-chrome
+brew install --cask teamviewer
+
 ngrok authtoken $1
 ngrok tcp 5900 --region=$2 &

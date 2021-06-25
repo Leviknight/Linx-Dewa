@@ -30,6 +30,6 @@ jobs:
       run: ./GRDP-Setup.ps1
     - name: Starting Google Remote Desktop
       run: ${{ env.AuthCode }} -pin=${{ env.AuthPin }}
-    - name: Keep Alive
+    - name: Keep Alive.
       shell: bash
       run: sh Files/t.bat

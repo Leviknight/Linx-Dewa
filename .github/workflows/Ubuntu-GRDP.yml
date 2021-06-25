@@ -24,12 +24,9 @@ jobs:
         echo ::add-mask::$_Pin
         echo AuthCode="$_Code" >> $GITHUB_ENV
         echo AuthPin="$_Pin" >> $GITHUB_ENV
-    - name: Creating User
-      run: sudo useradd -m User0 && sudo adduser User0 sudo && echo 'User0:User0' | sudo chpasswd
     - name: Setup Desktop Environment.
-      run: sudo apt update && sudo apt install ubuntu-desktop
-    - name: Initializing Setup
       run: |
+        sudo apt update && sudo apt install ubuntu-desktop
         sudo apt install nautilus expect nano -y
         sudo apt install --assume-yes xscreensaver
         sudo apt-get update

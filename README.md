@@ -1,12 +1,21 @@
 ## RDP Windows, Ubuntu & MacOS
 
-[![OS - MAcOS](https://img.shields.io/badge/Windows-blue?logo=Windows&logoColor=white)](https://www.apple.com/macos)
-[![OS - Ubuntu](https://img.shields.io/badge/Ubuntu-red?logo=Ubuntu&logoColor=white)](https://ubuntu.com/)
-[![OS - MAcOS](https://img.shields.io/badge/MacOS-white?logo=Apple&logoColor=black)](https://www.apple.com/macos)
+[![OS - Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)](https://www.microsoft.com/en-us/windows-server)
+[![OS - Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](https://ubuntu.com/)
+[![OS - MAcOS](https://img.shields.io/badge/MacOs-000000?style=for-the-badge&logo=Apple&logoColor=)](https://www.apple.com/macos/server/)
 
-> **⚠ WARNING**  
+[![GitHub followers](https://img.shields.io/github/followers/mrijoo.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/mrijoo)
+[![GitHub stars](https://img.shields.io/github/stars/mrijoo/RDP.svg?style=social&label=Star)](https://github.com/mrijoo/RDP)
+[![GitHub forks](https://img.shields.io/github/forks/mrijoo/RDP.svg?style=social&label=Fork)](https://github.com/mrijoo/RDP/fork)
+[![GitHub watchers](https://img.shields.io/github/watchers/mrijoo/RDP.svg?style=social&label=Watch)](https://github.com/mrijoo/RDP)
+
+[![GitHub issues](https://img.shields.io/github/issues/mrijoo/RDP.svg)](https://github.com/mrijoo/RDP/issues)
+[![GitHub issues](https://img.shields.io/github/issues-closed/mrijoo/RDP.svg)](https://github.com/mrijoo/RDP/issues)
+[![GitHub issues](https://img.shields.io/github/license/mrijoo/RDP.svg
+)](https://github.com/mrijoo/RDP)
+
+> **⚠️ WARNING**  
 > don't close the starter terminal (Connected to Github)
-
 
 ### Tunnel Servers.
 
@@ -51,3 +60,6 @@
 * Reload the page and press MacOS (Ngrok VNC Viewer)> build.
 * Press the down arrow on IP for Connect to your RDP to get IP.
 * Open VNC Viewer put ip in the field "Enter a VNC Server Address or search" and enter too connect.
+
+> **❕ TIPS**  
+> Use the te teamviewer to avoid the lag.
