@@ -1,5 +1,7 @@
 ## RDP Windows, Ubuntu & MacOS
 
+
+
 [![OS - Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)](https://www.microsoft.com/en-us/windows-server)
 [![OS - Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](https://ubuntu.com/)
 [![OS - MAcOS](https://img.shields.io/badge/MacOs-000000?style=for-the-badge&logo=Apple&logoColor=)](https://www.apple.com/macos/server/)
@@ -14,8 +16,12 @@
 [![GitHub issues](https://img.shields.io/github/license/mrijoo/RDP.svg
 )](https://github.com/mrijoo/RDP)
 
-> **⚠️ WARNING**  
-> don't close the starter terminal (Connected to Github)
+------
+
+**⚠️ WARNING**  
+don't close the starter terminal (Connected to Github)
+
+
 
 ### Tunnel Servers.
 
@@ -29,6 +35,11 @@
 
 ### How to run the project. 
 
+<details>
+    <summary>Ngrok (RDP)</summary>
+    
+------
+
 * Click Fork in the right corner of the screen to save it to your Github.
 * Visit https://dashboard.ngrok.com to get **Ngrok Auth Token**.
 * In Github go to Action> Windows (Ngrok RDP)> Run workflow.
@@ -37,8 +48,14 @@
 * Press Run workflow.
 * Reload the page and press Windows (Ngrok RDP)> build.
 * Press the down arrow on Account for Connect to your RDP to get IP, User, Password.
+------
 
-### Google Remote Desktop. 
+</details>
+
+<details>
+    <summary>Google Remote Desktop.</summary>
+
+------
 
 * Visit https://remotedesktop.google.com/headless to get **Google Remote Desktop Code**.
 * Click Start> Next> Allow> Copy Windows (Windows PowerShell) / Ubuntu (Debian Linux).
@@ -48,7 +65,19 @@
 * Reload the page and press Windows/Ubuntu (Google Remote Desktop)> build.
 * Wait and visit https://remotedesktop.google.com/access to connect rdp.
 
-### NVC Viewer. 
+------
+
+</details>
+
+<details>
+    <summary>Ngrok (NVC Viewer)</summary>
+
+<br>
+
+**❕ TIPS**  
+Use the te teamviewer to avoid the lag.
+
+------
 
 * Visit https://www.realvnc.com/en/connect/download/viewer to download **NVC Viewer**.
 * Install Software.
@@ -61,5 +90,20 @@
 * Press the down arrow on IP for Connect to your RDP to get IP.
 * Open VNC Viewer put ip in the field "Enter a VNC Server Address or search" and enter too connect.
 
-> **❕ TIPS**  
-> Use the te teamviewer to avoid the lag.
+------
+
+</details>
+
+### Ubuntu Desktop. 
+
+Number | Code | Desktop | Time Install
+----- | ----- | ----- | ----- 
+`1` | `ubuntu` | [Ubuntu](https://ubuntu.com/desktop) | 5-7 Minutes
+`2` | `ukui` | [UKUI](https://www.ukui.org) | 3-5 Minutes
+`3` | `lxde` | [LXDE](https://www.lxde.org) | 3-5 Minutes
+`4` | `mate` | [Mate](https://mate-desktop.org) | 4-7 Minutes
+`5` | `budgie` | [Budgie](https://ubuntubudgie.org) | 7-9 Minutes
+`6` | `kdeplasma` | [KDE Plasma](https://kde.org/plasma-desktop) | 9-11 Minutes
+`7` | `deepin` | [Deepin](https://www.deepin.org/zh/dde/) | 2-4 Minutes
+`8` | `xfce` | [XFCE ](https://www.xfce.org/) | 2-4 Minutes
+`9` | `cinnamon` | [Cinnamon](https://linuxmint.com/) | 6 - 8 Minutes

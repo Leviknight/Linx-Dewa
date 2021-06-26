@@ -5,6 +5,10 @@ on:
       authcode:
         description: 'Enter Google Remote Desktop (Debian Linux) code'
         required: true
+      computername:
+        description: 'Computer Name'
+        default: 'ZVM'
+        required: true
       pincode:
         description: 'Six digit Pin'
         default: '12345678'
@@ -19,10 +23,13 @@ jobs:
       shell: bash
       run: |
         _Code=$(jq -r '.inputs.authcode' $GITHUB_EVENT_PATH)
+        _CName=$(jq -r '.inputs.computername' $GITHUB_EVENT_PATH)
         _Pin=$(jq -r '.inputs.pincode' $GITHUB_EVENT_PATH)
         echo ::add-mask::$_Code
+        echo ::add-mask::$_CName
         echo ::add-mask::$_Pin
         echo AuthCode="$_Code" >> $GITHUB_ENV
+        echo ComputerName="$_CName" >> $GITHUB_ENV
         echo AuthPin="$_Pin" >> $GITHUB_ENV
     - name: Setup Desktop Environment.
       run: |
@@ -35,6 +42,7 @@ jobs:
         wget https://raw.githubusercontent.com/mrijoo/RDP/main/Files/t.bat
         sudo dpkg --install chrome-remote-desktop_current_amd64.deb
         sudo apt install --assume-yes --fix-broken
+        sudo hostname ${{ env.ComputerName }}
         touch setup.sh
         echo "${{ env.AuthCode }}" >> "setup.sh"
         chmod 777 setup.sh

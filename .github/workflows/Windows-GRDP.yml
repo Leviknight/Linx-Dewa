@@ -6,6 +6,10 @@ on:
       authcode:
         description: 'Enter Google Remote Desktop (Windows (PowerShell)) code'
         required: true
+      computername:
+        description: 'Computer Name'
+        default: 'ZVM'
+        required: true
       pincode:
         description: 'Six digit Pin'
         default: '12345678'
@@ -21,13 +25,16 @@ jobs:
       shell: bash
       run: |
         _Code=$(jq -r '.inputs.authcode' $GITHUB_EVENT_PATH)
+        _CName=$(jq -r '.inputs.computername' $GITHUB_EVENT_PATH)
         _Pin=$(jq -r '.inputs.pincode' $GITHUB_EVENT_PATH)
         echo ::add-mask::$_Code
+        echo ::add-mask::$_CName
         echo ::add-mask::$_Pin
         echo AuthCode="$_Code" >> $GITHUB_ENV
+        echo ComputerName="$_CName" >> $GITHUB_ENV
         echo AuthPin="$_Pin" >> $GITHUB_ENV
     - name: Initializing Setup
-      run: ./GRDP-Setup.ps1
+      run: ./GRDP-Setup.ps1 ${{ env.ComputerName }}
     - name: Starting Google Remote Desktop
       run: ${{ env.AuthCode }} -pin=${{ env.AuthPin }}
     - name: Keep Alive.
