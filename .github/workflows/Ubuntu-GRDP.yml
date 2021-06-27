@@ -1,4 +1,4 @@
-name: Ubuntu (Google Remote Desktop)
+name: Ubuntu Desktop (Google Remote Desktop)
 on: 
   workflow_dispatch:
     inputs:
@@ -12,6 +12,10 @@ on:
       pincode:
         description: 'Six digit Pin'
         default: '12345678'
+        required: true
+      desktop:
+        description: 'desktop number/code'
+        default: 'ubuntu'
         required: true
 
 jobs:
@@ -32,8 +36,9 @@ jobs:
         echo ComputerName="$_CName" >> $GITHUB_ENV
         echo AuthPin="$_Pin" >> $GITHUB_ENV
     - name: Setup Desktop Environment.
+      run: source Ubuntu-Setup.sh "${{ github.event.inputs.desktop }}"
+    - name: Setup Google Remote Desktop.
       run: |
-        sudo apt update && sudo apt install ubuntu-desktop
         sudo apt install nautilus expect nano -y
         sudo apt install --assume-yes xscreensaver
         sudo apt-get update
@@ -47,7 +52,7 @@ jobs:
         echo "${{ env.AuthCode }}" >> "setup.sh"
         chmod 777 setup.sh
     - name: Starting Google Remote Desktop
-      run: |   
+      run: |
         expect -c '
         spawn ./setup.sh
         expect "Enter a PIN of at least six digits: "
