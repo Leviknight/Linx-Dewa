@@ -106,7 +106,7 @@ Number | Code | Desktop | Time Install
 `6` | `kdeplasma` | [KDE Plasma](https://kde.org/plasma-desktop) | 9-11 Minutes
 `7` | `deepin` | [Deepin](https://www.deepin.org/zh/dde) | 2-4 Minutes
 `8` | `xfce` | [XFCE ](https://www.xfce.org) | 2-4 Minutes
-`9` | `cinnamon` | [Cinnamon](https://linuxmint.com) | 6-8 MinutesMinutes
+`9` | `cinnamon` | [Cinnamon](https://linuxmint.com) | 6-8 Minutes
 `10` | `unity` | [Unity](https://ubuntuunity.org) | 5-9 Minutes
 `11` | `xubuntu` | [Xubuntu](https://xubuntu.org/) | 15-19 Minutes
 `12` | `kubuntu` | [Kubuntu](https://kubuntu.org) | 13-18 Minutes
