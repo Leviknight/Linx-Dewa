@@ -18,9 +18,9 @@
 
 ------
 
-**⚠️ WARNING**  
-don't close the starter terminal (Connected to Github)
-
+> ***⚠️ WARNING***  
+> Not for Cryptocurrency Mining.                                              
+> don't close the starter terminal (Connected to Github).
 
 
 ### Tunnel Servers.
