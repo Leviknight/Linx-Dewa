@@ -103,7 +103,7 @@ Number | Code | Desktop | Time Install
 `3` | `lxde` | [LXDE](https://www.lxde.org) | 3-5 Minutes
 `4` | `mate` | [Mate](https://mate-desktop.org) | 4-7 Minutes
 `5` | `budgie` | [Budgie](https://ubuntubudgie.org) | 7-9 Minutes
-`6` | `kdeplasma` | [KDE Plasma](https://kde.org/plasma-desktop) | 9-11 Minutes
+`6` | `kdep` | [KDE Plasma](https://kde.org/plasma-desktop) | 9-11 Minutes
 `7` | `deepin` | [Deepin](https://www.deepin.org/zh/dde) | 2-4 Minutes
 `8` | `xfce` | [XFCE ](https://www.xfce.org) | 2-4 Minutes
 `9` | `cinnamon` | [Cinnamon](https://linuxmint.com) | 6-8 Minutes
