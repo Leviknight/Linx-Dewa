@@ -3,6 +3,8 @@ if [ -z "$NGIP" ]
 then
     echo "Can't get NGROK tunnel, Maybe your previous VM still running: https://dashboard.ngrok.com/status/tunnels "
 else
-    echo IP:
-    echo $NGIP
+    NGIP=${NGIP//'"tcp:'}
+    NGIP=${NGIP//'"'}
+    NGIP="$( echo -e "$NGIP" | tr  '/' ' '  )"
+    echo IP: $NGIP
 fi
